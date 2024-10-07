@@ -25,6 +25,7 @@ use crate::folding::{
 };
 use crate::frontend::FCircuit;
 use crate::transcript::{poseidon::poseidon_canonical_config, AbsorbNonNative, Transcript};
+use crate::transcript::{poseidon::poseidon_canonical_config, AbsorbNonNative, Transcript};
 use crate::utils::vec::is_zero_vec;
 use crate::Error;
 use crate::FoldingScheme;
@@ -200,6 +201,7 @@ impl<C: CurveGroup> WitnessOps<C::ScalarField> for Witness<C> {
 
 #[derive(Debug, Clone)]
 pub struct PreprocessorParam<C1, C2, FC, CS1, CS2, const H: bool = false>
+pub struct PreprocessorParam<C1, C2, FC, CS1, CS2, const H: bool = false>
 where
     C1: CurveGroup,
     C2: CurveGroup,
@@ -238,6 +240,7 @@ where
 
 /// Proving parameters for Nova-based IVC
 #[derive(Debug, Clone)]
+pub struct ProverParams<C1, C2, CS1, CS2, const H: bool = false>
 pub struct ProverParams<C1, C2, CS1, CS2, const H: bool = false>
 where
     C1: CurveGroup,
@@ -317,6 +320,7 @@ where
 
 /// Verification parameters for Nova-based IVC
 #[derive(Debug, Clone)]
+pub struct VerifierParams<C1, C2, CS1, CS2, const H: bool = false>
 pub struct VerifierParams<C1, C2, CS1, CS2, const H: bool = false>
 where
     C1: CurveGroup,

@@ -382,6 +382,8 @@ pub mod tests {
 
         let preprocessor_param = PreprocessorParam::new(poseidon_config, F_circuit);
         let nova_params = N::preprocess(&mut rng, &preprocessor_param).unwrap();
+        let preprocessor_param = PreprocessorParam::new(poseidon_config, F_circuit);
+        let nova_params = N::preprocess(&mut rng, &preprocessor_param).unwrap();
 
         let start = Instant::now();
         let mut nova = N::init(&nova_params, F_circuit, z_0.clone()).unwrap();
@@ -452,6 +454,17 @@ pub mod tests {
         >;
 
         let mut rng = rand::rngs::OsRng;
+        let poseidon_config = poseidon_canonical_config::<Fr>();
+
+        let F_circuit = CubicFCircuit::<Fr>::new(()).unwrap();
+        let z_0 = vec![Fr::from(3_u32)];
+
+        let preprocessor_param = PreprocessorParam::new(poseidon_config, F_circuit);
+        let nova_params = N::preprocess(&mut rng, &preprocessor_param).unwrap();
+
+        let start = Instant::now();
+        let nova = N::init(&nova_params, F_circuit, z_0.clone()).unwrap();
+        println!("Nova initialized, {:?}", start.elapsed());
         let poseidon_config = poseidon_canonical_config::<Fr>();
 
         let F_circuit = CubicFCircuit::<Fr>::new(()).unwrap();
