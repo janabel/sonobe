@@ -19,8 +19,10 @@ pub mod frontend;
 pub mod transcript;
 pub mod utils;
 
-pub fn test_print() {
-    println!("testing print...");
+pub mod TestPrint {
+    pub fn test_print() {
+        println!("This is a test print");
+    }
 }
 
 #[derive(Debug, Error)]
