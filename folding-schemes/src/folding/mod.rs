@@ -4,6 +4,12 @@ pub mod nova;
 pub mod protogalaxy;
 pub mod traits;
 
+pub mod TestPrint {
+    pub fn test_print() {
+        println!("This is a test print");
+    }
+}
+
 #[cfg(test)]
 pub mod tests {
     use ark_ec::CurveGroup;
