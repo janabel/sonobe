@@ -1010,7 +1010,11 @@ where
             cf_U_i,
         } = ivc_proof;
 
+        println!("starting verify...");
+
         let sponge = PoseidonSponge::<C1::ScalarField>::new(&vp.poseidon_config);
+
+        println!("initalized sponge");
 
         if num_steps == C1::ScalarField::zero() {
             if z_0 != z_i {
@@ -1019,33 +1023,51 @@ where
             return Ok(());
         }
 
+        println!("nonzero steps");
+
         if u_i.x.len() != 2 || U_i.x.len() != 2 {
             return Err(Error::IVCVerificationFail);
         }
 
+        println!("u_i correct length");
+
         let pp_hash = vp.pp_hash()?;
+
+        println!("got pp_hash");
 
         // check that u_i's output points to the running instance
         // u_i.X[0] == H(i, z_0, z_i, U_i)
         let expected_u_i_x = U_i.hash(&sponge, pp_hash, num_steps, &z_0, &z_i);
+        println!("got expected_u_i_x");
         if expected_u_i_x != u_i.x[0] {
             return Err(Error::IVCVerificationFail);
         }
+        println!("expected_u_i_x != u_i.x[0] correct");
+
         // u_i.X[1] == H(cf_U_i)
         let expected_cf_u_i_x = cf_U_i.hash_cyclefold(&sponge, pp_hash);
+        println!("got expected_cf_u_i_x");
         if expected_cf_u_i_x != u_i.x[1] {
             return Err(Error::IVCVerificationFail);
         }
+        println!("expected_cf_u_i_x != u_i.x[1] correct");
 
         // check R1CS satisfiability, which is equivalent to checking if `u_i`
         // is an incoming instance and if `w_i` and `u_i` satisfy RelaxedR1CS
         u_i.check_incoming()?;
+        println!("u_1 checked incoming instance");
         vp.r1cs.check_relation(&w_i, &u_i)?;
+        println!("checked r1cs satisfiability");
+
         // check RelaxedR1CS satisfiability
         vp.r1cs.check_relation(&W_i, &U_i)?;
+        println!("checked RelaxedR1CS satisfiability");
 
         // check CycleFold RelaxedR1CS satisfiability
         vp.cf_r1cs.check_relation(&cf_W_i, &cf_U_i)?;
+        println!("checked CycleFold RelaxedR1CS satisfiability");
+
+        println!("passed verification!");
 
         Ok(())
     }
