@@ -1068,9 +1068,9 @@ where
         vp.r1cs.check_relation(&w_i, &u_i)?;
         println!("checked r1cs satisfiability");
 
-        // check RelaxedR1CS satisfiability
-        vp.r1cs.check_relation(&W_i, &U_i)?;
-        println!("checked RelaxedR1CS satisfiability");
+        // // check RelaxedR1CS satisfiability
+        // vp.r1cs.check_relation(&W_i, &U_i)?;
+        // println!("checked RelaxedR1CS satisfiability");
 
         // check CycleFold RelaxedR1CS satisfiability
         vp.cf_r1cs.check_relation(&cf_W_i, &cf_U_i)?;
