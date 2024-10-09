@@ -1004,6 +1004,9 @@ where
     /// Implements IVC.V of Nov.clone()a+CycleFold. Notice that this method does not include the
     /// commitments verification, which is done in the Decider.
     fn verify(vp: Self::VerifierParam, ivc_proof: Self::IVCProof) -> Result<(), Error> {
+
+        println!("starting verify...");
+
         let Self::IVCProof {
             i: num_steps,
             z_0,
