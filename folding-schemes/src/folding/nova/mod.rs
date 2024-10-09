@@ -73,6 +73,12 @@ impl<C: CurveGroup> CycleFoldConfig for NovaCycleFoldConfig<C> {
 /// in Nova instances.
 pub type NovaCycleFoldCircuit<C, GC> = CycleFoldCircuit<NovaCycleFoldConfig<C>, GC>;
 
+// pub struct TestPrint {
+//     fn print_something:() {
+//         println!("testing print w/ minimal example");
+//     }
+// }
+
 #[derive(Debug, Clone, Eq, PartialEq, CanonicalSerialize, CanonicalDeserialize)]
 pub struct CommittedInstance<C: CurveGroup> {
     pub cmE: C,

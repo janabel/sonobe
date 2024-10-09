@@ -19,6 +19,10 @@ pub mod frontend;
 pub mod transcript;
 pub mod utils;
 
+pub fn test_print() {
+    println!("testing print...");
+}
+
 #[derive(Debug, Error)]
 pub enum Error {
     // Wrappers on top of other errors
